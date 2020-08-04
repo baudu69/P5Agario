@@ -8,6 +8,7 @@ import pygame
 runfuntion = None
 setupfunction = None
 screen = None
+fps = 60
 
 
 
@@ -28,6 +29,7 @@ def run():
 
 
 
+
 def main(setupf,runf):
     print(inspect.stack()[1].function)
     global runfuntion
@@ -40,12 +42,13 @@ def main(setupf,runf):
     clock = pygame.time.Clock()
     done = False
     while not done:
+        screen.fill(0)
         run()
         for event in pygame.event.get():  # User did something
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
 
-        clock.tick(60)
+        clock.tick(fps)
 
         # Go ahead and update the screen with what we 've drawn.
         pygame.display.flip()
