@@ -4,10 +4,12 @@ from pygame.rect import Rect
 import core
 
 
+
 def setup():
-    print("Setup")
+    print("Setup START---------")
     core.fps = 1
     core.WINDOW_SIZE = [400, 400]
+    print("Setup END-----------")
 
 def run():
 

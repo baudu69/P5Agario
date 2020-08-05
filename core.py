@@ -11,6 +11,8 @@ screen = None
 fps = 60
 noloop = False
 WINDOW_SIZE = [100, 100]
+width = 0
+height = 1
 
 def noLoop():
     global noloop
@@ -52,6 +54,7 @@ def main(setupf,runf):
 
 
     done = False
+    print("Run START-----------")
     while not done:
         if not noloop :
             screen.fill(0)
