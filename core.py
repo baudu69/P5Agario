@@ -9,19 +9,28 @@ runfuntion = None
 setupfunction = None
 screen = None
 fps = 60
+noloop = False
+WINDOW_SIZE = [100, 100]
 
+def noLoop():
+    global noloop
+    noloop = True
 
 
 def setup():
     pygame.init()
-    WINDOW_SIZE = [400, 400]
+    global WINDOW_SIZE
+    WINDOW_SIZE
+    if (setupfunction is not None):
+        setupfunction()
+
+
     global screen
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     # Set title of screen
-    pygame.display.set_caption("Map")
-    if(setupfunction is not None):
-        setupfunction()
+    pygame.display.set_caption("Window")
+
 
 def run():
     if (runfuntion is not None):
@@ -40,10 +49,14 @@ def main(setupf,runf):
     setup()
 
     clock = pygame.time.Clock()
+
+
     done = False
     while not done:
-        screen.fill(0)
-        run()
+        if not noloop :
+            screen.fill(0)
+            run()
+
         for event in pygame.event.get():  # User did something
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
