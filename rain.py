@@ -12,7 +12,7 @@ def setup():
     core.WINDOW_SIZE = [400, 400]
 
     for i in range(0, 1000):
-        drops.append(Vector2(random.randint(0, core.WINDOW_SIZE[0]), random.randint(-100,0)))
+        drops.append(Vector2(random.randint(0, core.WINDOW_SIZE[0]), random.randint(-400,0)))
     print("Setup END-----------")
 
 
@@ -26,7 +26,7 @@ def update():
         drop.y += gravity
         if drop.y > core.WINDOW_SIZE[1]:
             drop.x = random.randint(0, core.WINDOW_SIZE[0])
-            drop.y = random.randint(-100,0)
+            drop.y = random.randint(-400,0)
 
 
 def show():
