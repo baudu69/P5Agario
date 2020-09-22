@@ -80,6 +80,7 @@ def main(setupf,runf):
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
                     mouseclick = False
+                    mouseclickleft=None
 
             elif event.type == pygame.MOUSEMOTION:
                 if mouseclick:
