@@ -21,7 +21,7 @@ def noLoop():
     noloop = True
 
 def getMouseLeftClick():
-    if mouseclickleft[0] != -1 :
+    if mouseclick :
         return mouseclickleft
 
 
