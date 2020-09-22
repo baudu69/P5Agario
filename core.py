@@ -13,10 +13,16 @@ noloop = False
 WINDOW_SIZE = [100, 100]
 width = 0
 height = 1
+mouseclickleft=[-1,-1]
+mouseclick = False
 
 def noLoop():
     global noloop
     noloop = True
+
+def getMouseLeftClick():
+    if mouseclickleft[0] != -1 :
+        return mouseclickleft
 
 
 def setup():
@@ -47,6 +53,7 @@ def main(setupf,runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
+    global mouseclickleft, mouseclick
 
     setup()
 
@@ -63,6 +70,20 @@ def main(setupf,runf):
         for event in pygame.event.get():  # User did something
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
+
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                        mouseclick = True
+                        mouseclickleft = event.pos
+
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    mouseclick = False
+
+            elif event.type == pygame.MOUSEMOTION:
+                if mouseclick:
+                    mouseclickleft = event.pos
 
         clock.tick(fps)
 

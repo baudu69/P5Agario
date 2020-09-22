@@ -19,6 +19,7 @@ def setup():
 def run():
     show()
     update()
+    print(core.getMouseLeftClick())
 
 
 def update():
