@@ -9,7 +9,7 @@ runfuntion = None
 setupfunction = None
 screen = None
 fps = 60
-noloop = False
+loopLock = False
 WINDOW_SIZE = [100, 100]
 width = 0
 height = 1
@@ -19,8 +19,8 @@ mouseclickright=[-1,-1]
 mouseclickR= False
 
 def noLoop():
-    global noloop
-    noloop = True
+    global loopLock
+    loopLock = True
 
 def getMouseLeftClick():
     if mouseclickL:
@@ -68,7 +68,7 @@ def main(setupf,runf):
     done = False
     print("Run START-----------")
     while not done:
-        if not noloop :
+        if not loopLock :
             screen.fill(0)
             run()
 
