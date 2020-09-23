@@ -14,15 +14,20 @@ WINDOW_SIZE = [100, 100]
 width = 0
 height = 1
 mouseclickleft=[-1,-1]
-mouseclick = False
+mouseclickL= False
+mouseclickright=[-1,-1]
+mouseclickR= False
 
 def noLoop():
     global noloop
     noloop = True
 
 def getMouseLeftClick():
-    if mouseclick :
+    if mouseclickL:
         return mouseclickleft
+def getMouseRightClick():
+    if mouseclickR:
+        return mouseclickright
 
 
 def setup():
@@ -53,7 +58,7 @@ def main(setupf,runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global mouseclickleft, mouseclick
+    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR
 
     setup()
 
@@ -72,19 +77,28 @@ def main(setupf,runf):
                 done = True  # Flag that we are done so we exit this loop
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+
                 if event.button == 1:
-                        mouseclick = True
+                        mouseclickL= True
                         mouseclickleft = event.pos
+                if event.button == 3:
+                    mouseclickR = True
+                    mouseclickright = event.pos
 
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    mouseclick = False
+                    mouseclickL= False
                     mouseclickleft=None
+                if event.button == 3:
+                    mouseclickR= False
+                    mouseclickright=None
 
             elif event.type == pygame.MOUSEMOTION:
-                if mouseclick:
+                if mouseclickL:
                     mouseclickleft = event.pos
+                if mouseclickR:
+                    mouseclickright = event.pos
 
         clock.tick(fps)
 
