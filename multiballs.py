@@ -26,7 +26,9 @@ def run():
     for b in balls:
         pygame.draw.circle(core.screen, (255, 0, 0), (b[0], b[1]),  10)
 
-
+    #Rebond
+    
+    #Changement de couleur
 
 
 
