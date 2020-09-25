@@ -13,7 +13,7 @@ def setup():
     core.WINDOW_SIZE = [400, 400]
 
     for i in range(0, 10):
-        balls = balls + [[random.randint(0,400),random.randint(0,400),random.uniform(-1,1),random.uniform(-1,1)]]
+        balls = balls + [[random.randint(0,400),random.randint(0,400),random.uniform(-2,2),random.uniform(-2,2)]]
     print("Setup END-----------")
 
 
