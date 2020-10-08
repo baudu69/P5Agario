@@ -9,14 +9,25 @@ runfuntion = None
 setupfunction = None
 screen = None
 fps = 60
-noloop = False
+loopLock = False
 WINDOW_SIZE = [100, 100]
 width = 0
 height = 1
+mouseclickleft=[-1,-1]
+mouseclickL= False
+mouseclickright=[-1,-1]
+mouseclickR= False
 
 def noLoop():
-    global noloop
-    noloop = True
+    global loopLock
+    loopLock = True
+
+def getMouseLeftClick():
+    if mouseclickL:
+        return mouseclickleft
+def getMouseRightClick():
+    if mouseclickR:
+        return mouseclickright
 
 
 def setup():
@@ -47,6 +58,7 @@ def main(setupf,runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
+    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR
 
     setup()
 
@@ -56,7 +68,7 @@ def main(setupf,runf):
     done = False
     print("Run START-----------")
     while not done:
-        if not noloop :
+        if not loopLock :
             screen.fill(0)
             run()
 
@@ -64,8 +76,32 @@ def main(setupf,runf):
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
 
-        clock.tick(fps)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
 
+                if event.button == 1:
+                        mouseclickL= True
+                        mouseclickleft = event.pos
+                if event.button == 3:
+                    mouseclickR = True
+                    mouseclickright = event.pos
+
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    mouseclickL= False
+                    mouseclickleft=None
+                if event.button == 3:
+                    mouseclickR= False
+                    mouseclickright=None
+
+            elif event.type == pygame.MOUSEMOTION:
+                if mouseclickL:
+                    mouseclickleft = event.pos
+                if mouseclickR:
+                    mouseclickright = event.pos
+
+        clock.tick(fps)
+        #print(clock.get_time())
         # Go ahead and update the screen with what we 've drawn.
         pygame.display.flip()
 
