@@ -21,12 +21,13 @@ def run():
     update()
 
 
+
 def update():
     for drop in drops:
         drop.y += gravity
         if drop.y > core.WINDOW_SIZE[1]:
             drop.x = random.randint(0, core.WINDOW_SIZE[0])
-            drop.y = random.randint(-100,0)
+            drop.y = random.randint(-400,0)
 
 
 def show():
