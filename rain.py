@@ -23,6 +23,7 @@ def run():
 
 
 def update():
+    print(core.keyPressValue)
     for drop in drops:
         drop.y += gravity
         if drop.y > core.WINDOW_SIZE[1]:

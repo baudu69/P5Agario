@@ -17,6 +17,9 @@ mouseclickleft=[-1,-1]
 mouseclickL= False
 mouseclickright=[-1,-1]
 mouseclickR= False
+keyPress=False
+keyPressValue=None
+
 
 def noLoop():
     global loopLock
@@ -28,6 +31,13 @@ def getMouseLeftClick():
 def getMouseRightClick():
     if mouseclickR:
         return mouseclickright
+def getkeyPress():
+    return keyPress
+
+def getkeyPressValue():
+    return keyPressValue
+
+
 
 
 def setup():
@@ -58,7 +68,7 @@ def main(setupf,runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR
+    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR,keyPress,keyPressValue
 
     setup()
 
@@ -76,6 +86,11 @@ def main(setupf,runf):
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
 
+            elif event.type == pygame.KEYDOWN:
+                keyPress = True
+                keyPressValue = event.key
+            elif event.type == pygame.KEYUP:
+                keyPressValue = None
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
                 if event.button == 1:
