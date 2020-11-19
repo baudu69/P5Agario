@@ -1,55 +1,44 @@
-
 import random
+
 import pygame
-from pygame.math import Vector2
 import core
 
-balls = []
+hauteur = 500
+largeur = 500
 
+balls = []  #  [ [x,y,xdir,ydir],[x2,y2,xDir2,yDir2].... ]
 
 def setup():
+    print("setup")
     global balls
-    print("Setup START---------")
-    core.fps = 30
-    core.WINDOW_SIZE = [400, 400]
-    rMax=10
-    nbBalls = int(input("Nombre de balles ?"))
-    for i in range(0, nbBalls):
-        balls = balls + [[random.randint(rMax,400-rMax),random.randint(rMax,400-rMax),random.uniform(-5,5),random.uniform(-5,5),(random.randint(0,255),random.randint(0,255),random.randint(0,255)),random.randint(10,rMax)]]
-        print(balls)
-    print("Setup END-----------")
+    core.WINDOW_SIZE=[hauteur,largeur]
+    core.fps=30
+
+    for i in range(0,10):
+        x = random.randint(0,largeur)
+        y = random.randint(0,hauteur)
+
+        xd = random.uniform(-5,5)
+        yd = random.uniform(-5, 5)
+        balls = balls + [ [ x ,y ,xd,yd ] ]
 
 
 def run():
-    global balls
+    print("Run")
 
-
-    #Rebond
+    #Affichage
     for b in balls:
         print(b)
-        if b[0] > core.WINDOW_SIZE[0]-b[5]:
-            b[2] = abs(b[2]) * -1
-            b[4] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-        if b[0] < b[5] :
-            b[2] = abs(b[2])
-            b[4]=(random.randint(0,255),random.randint(0,255),random.randint(0,255))
-            print("change X")
+        pygame.draw.circle(core.screen, (255, 0, 0), (b[0],b[1]), 20)
 
-        if b[1] > core.WINDOW_SIZE[1]-b[5] :
-            b[3] = abs(b[3]) * -1
-            b[4] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-            print("change Y")
-        if  b[1] < b[5]:
-            b[3] = abs(b[3])
-    
+
+    #Update Position
     for b in balls:
-        b[0]= int(b[0]+ 5*b[2])
-        b[1] = int(b[1] + 5*b[3])
+        b[0] = b[0] + b[2]
+        b[1] = b[1] + b[3]
 
-    for b in balls:
-        pygame.draw.circle(core.screen, (b[4]), (b[0], b[1]),  b[5])
+    #Gestion des bords de l'écran
+
+core.main(setup,run)
 
 
-
-
-core.main(setup, run)
