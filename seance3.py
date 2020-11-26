@@ -42,5 +42,10 @@ def run():
     ball2[0]=int(ball2[0]+Frappel[0])
     ball2[1]=int(ball2[1]+Frappel[1])
 
+    if core.getMouseLeftClick() is not None:
+        FrappelSouris = Spring(core.getMouseLeftClick(),ball1,-1,10)
+        ball1[0]=int(ball1[0]+FrappelSouris[0])
+        ball1[1]=int(ball1[1]+FrappelSouris[1])
+
 
 core.main(setup, run)
