@@ -120,10 +120,11 @@ def main(setupf,runf):
                 if mouseclickR:
                     mouseclickright = event.pos
 
-            if keyPressValue:
-                keyReleaseValue = event.key
-            else:
-                keyReleaseValue = None
+            if hasattr(event,'key'):
+                if keyPressValue:
+                    keyReleaseValue = event.key
+                else:
+                    keyReleaseValue = None
 
 
         clock.tick(fps)
