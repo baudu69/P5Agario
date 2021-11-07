@@ -17,7 +17,9 @@ def setup():
 
 
 def run():
+    core.cleanScreen()
     pygame.draw.circle(core.screen, core.memory("couleurducercle"), core.memory("centredecercle"), core.memory("rayonducercle"))
-    print(core.getMouseLeftClick())
+    if core.getMouseLeftClick() is not None:
+        core.memory("centredecercle",core.getMouseLeftClick())
 
 core.main(setup, run)

@@ -32,6 +32,7 @@ def update():
 
 
 def show():
+    core.cleanScreen()
     for drop in drops:
         pygame.draw.line(core.screen, (255, 0, 255), (drop.x, drop.y), (drop.x, drop.y + 10), 1)
 

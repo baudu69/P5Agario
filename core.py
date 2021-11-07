@@ -6,6 +6,7 @@ from types import FrameType
 
 import pygame
 
+screenCleen = True
 runfuntion = None
 setupfunction = None
 screen = None
@@ -43,6 +44,9 @@ def noLoop():
     global loopLock
     loopLock = True
 
+def cleanScreen():
+    global screenCleen
+    screenCleen = True
 
 def getMouseLeftClick():
     if mouseclickL:
@@ -91,7 +95,7 @@ def main(setupf, runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue
+    global screenCleen, mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue,screen
 
     setup()
 
@@ -100,8 +104,11 @@ def main(setupf, runf):
     done = False
     print("Run START-----------")
     while not done:
+
         if not loopLock:
-            screen.fill(0)
+            if screenCleen:
+                screenCleen = False
+                screen.fill(0)
             run()
 
         for event in pygame.event.get():  # User did something
@@ -145,6 +152,8 @@ def main(setupf, runf):
                     keyReleaseValue = None
 
         clock.tick(fps)
+
+
         # print(clock.get_time())
         # Go ahead and update the screen with what we 've drawn.
         pygame.display.flip()
