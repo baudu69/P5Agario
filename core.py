@@ -1,6 +1,7 @@
 import inspect
+import sys
 import time
-from typing  import cast
+from typing import cast
 from types import FrameType
 
 import pygame
@@ -13,35 +14,56 @@ loopLock = False
 WINDOW_SIZE = [100, 100]
 width = 0
 height = 1
-mouseclickleft=[-1,-1]
-mouseclickL= False
-mouseclickright=[-1,-1]
-mouseclickR= False
-keyPress=False
-keyPressValue=None
+mouseclickleft = None
+mouseclickL = False
+mouseclickright = [-1, -1]
+mouseclickR = False
+keyPress = False
+keyPressValue = None
 keyReleaseValue = None
+memoryStorage = {}
+
+
+def memory(key, value=None):
+    global memoryStorage
+    if " " in key:
+        sys.stderr.write("ERREUR : Espace interdit dans les noms de variable : " + key + "\n")
+        sys.exit()
+    if value is not None:
+        memoryStorage[key] = value
+    else:
+        try:
+            return memoryStorage[key]
+        except:
+            sys.stderr.write("ERREUR : Nom de variable inconnue : " + key)
+            sys.exit()
 
 
 def noLoop():
     global loopLock
     loopLock = True
 
+
 def getMouseLeftClick():
     if mouseclickL:
         return mouseclickleft
+
+
 def getMouseRightClick():
     if mouseclickR:
         return mouseclickright
+
+
 def getkeyPress():
     return keyPress
+
 
 def getkeyPressValue():
     return keyPressValue
 
+
 def getkeyRelease():
-    return  keyReleaseValue
-
-
+    return keyReleaseValue
 
 
 def setup():
@@ -50,7 +72,6 @@ def setup():
     WINDOW_SIZE
     if (setupfunction is not None):
         setupfunction()
-
 
     global screen
     screen = pygame.display.set_mode(WINDOW_SIZE)
@@ -64,25 +85,22 @@ def run():
         runfuntion()
 
 
-
-
-def main(setupf,runf):
+def main(setupf, runf):
     print(inspect.stack()[1].function)
     global runfuntion
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR,keyPress,keyPressValue, keyReleaseValue
+    global mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue
 
     setup()
 
     clock = pygame.time.Clock()
 
-
     done = False
     print("Run START-----------")
     while not done:
-        if not loopLock :
+        if not loopLock:
             screen.fill(0)
             run()
 
@@ -99,8 +117,8 @@ def main(setupf,runf):
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
                 if event.button == 1:
-                        mouseclickL= True
-                        mouseclickleft = event.pos
+                    mouseclickL = True
+                    mouseclickleft = event.pos
                 if event.button == 3:
                     mouseclickR = True
                     mouseclickright = event.pos
@@ -108,11 +126,11 @@ def main(setupf,runf):
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    mouseclickL= False
-                    mouseclickleft=None
+                    mouseclickL = False
+                    mouseclickleft = None
                 if event.button == 3:
-                    mouseclickR= False
-                    mouseclickright=None
+                    mouseclickR = False
+                    mouseclickright = None
 
             elif event.type == pygame.MOUSEMOTION:
                 if mouseclickL:
@@ -120,16 +138,13 @@ def main(setupf,runf):
                 if mouseclickR:
                     mouseclickright = event.pos
 
-            if hasattr(event,'key'):
+            if hasattr(event, 'key'):
                 if keyPressValue:
                     keyReleaseValue = event.key
                 else:
                     keyReleaseValue = None
 
-
         clock.tick(fps)
-        #print(clock.get_time())
+        # print(clock.get_time())
         # Go ahead and update the screen with what we 've drawn.
         pygame.display.flip()
-
-
