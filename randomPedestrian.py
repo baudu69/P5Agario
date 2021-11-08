@@ -15,7 +15,7 @@ def setup():
 
 
 def run():
-
+    core.printMemory()
     x = core.memory("Pos")[0] + random.randint(-10,10)
     y = core.memory("Pos")[1] + random.randint(-10,10)
 

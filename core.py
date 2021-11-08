@@ -24,6 +24,9 @@ keyPressValue = None
 keyReleaseValue = None
 memoryStorage = {}
 
+def printMemory():
+    for k,v in memoryStorage.items():
+        print("Nom : ",k," Valeur :",v, " Type : ",type(v))
 
 def memory(key, value=None):
     global memoryStorage
