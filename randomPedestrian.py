@@ -18,7 +18,6 @@ def setup():
 def run():
 
     core.cleanScreen()
-    print(core.getKeyPressList(276))
 
     if core.getKeyPressList(276):
         if core.memory("monVecteur").angle_to(Vector2(0,1)) > -45:
