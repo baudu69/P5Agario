@@ -22,11 +22,16 @@ mouseclickR = False
 keyPress = False
 keyPressValue = None
 keyReleaseValue = None
+keyPressList = None
 memoryStorage = {}
 
 def printMemory():
+    print("--------------MEMORY:-------------------")
     for k,v in memoryStorage.items():
         print("Nom : ",k," Valeur :",v, " Type : ",type(v))
+    print("----------------------------------------")
+    print("\n")
+
 
 def memory(key, value=None):
     global memoryStorage
@@ -64,6 +69,11 @@ def getMouseRightClick():
 def getkeyPress():
     return keyPress
 
+def getKeyPressList(value):
+    if keyPressList is not None:
+        if len(keyPressList) > value:
+            return keyPressList[value] == 1
+    return False
 
 def getkeyPressValue():
     return keyPressValue
@@ -98,7 +108,7 @@ def main(setupf, runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global screenCleen, mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue,screen
+    global keyPressList,screenCleen, mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue,screen
 
     setup()
 
@@ -121,6 +131,7 @@ def main(setupf, runf):
             elif event.type == pygame.KEYDOWN:
                 keyPress = True
                 keyPressValue = event.key
+                keyPressList = pygame.key.get_pressed()
             elif event.type == pygame.KEYUP:
                 keyPressValue = None
 
