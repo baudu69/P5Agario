@@ -131,7 +131,7 @@ def main(setupf, runf):
             elif event.type == pygame.KEYDOWN:
                 keyPress = True
                 keyPressValue = event.key
-                keyPressList = pygame.key.get_pressed()
+                
             elif event.type == pygame.KEYUP:
                 keyPressValue = None
 
@@ -160,6 +160,7 @@ def main(setupf, runf):
                     mouseclickright = event.pos
 
             if hasattr(event, 'key'):
+                keyPressList = pygame.key.get_pressed()
                 if keyPressValue:
                     keyReleaseValue = event.key
                 else:
