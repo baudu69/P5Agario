@@ -1,3 +1,5 @@
+from math import sqrt
+
 import pygame
 
 
@@ -6,5 +8,11 @@ class Point2d:
         self.x=x
         self.y=y
 
-    def show(self,screen):
-        pygame.draw.circle(screen,(255,0,0),(self.x,self.y),2)
+    def show(self,screen,color=(255,0,0)):
+        pygame.draw.circle(screen,color,(self.x,self.y),2)
+
+    def distance(self,p):
+        return sqrt((p.x-self.x)**2 + (p.y - self.y)**2)
+
+    def toArray(self):
+        return [self.x,self.y]

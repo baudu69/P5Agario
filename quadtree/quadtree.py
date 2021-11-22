@@ -67,3 +67,27 @@ class QuadTree:
             self.southwest.show(screen)
 
 
+    def query(self, point, radius):
+
+        if not self.boundary.intersection(point,radius):
+            return []
+        else:
+
+            if not self.divided:
+                found = []
+                for p in self.points:
+                    if p.distance(point) <= radius:
+                        found.append(p)
+                return found
+            else:
+                found=self.northest.query(point, radius)
+                found=found+self.northwest.query(point, radius)
+                found=found+self.southest.query(point, radius)
+                found=found+self.southwest.query(point, radius)
+
+                return found
+
+
+
+
+
