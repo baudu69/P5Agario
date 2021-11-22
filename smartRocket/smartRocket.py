@@ -9,7 +9,7 @@ from rocket import Rocket
 
 def setup():
     print("Setup START---------")
-    core.fps = 60
+    core.fps = 30
     core.WINDOW_SIZE = [800, 600]
 
     core.memory("target",Vector2(400,100))
@@ -27,6 +27,7 @@ def selection():
         child = parentA.crossover(parentB)
         newRocket = Rocket(core.memory("lifetime"))
         newRocket.dna = child
+        newRocket.mutation()
         newPopulation.append(newRocket)
 
     core.memory('rockets',newPopulation)
@@ -72,7 +73,7 @@ def run():
 def restart():
     core.memory("rockets", [])
     core.memory("nbRocket", 25)
-    core.memory("lifetime", 400)
+    core.memory("lifetime", 200)
     core.memory("time", 0)
 
 

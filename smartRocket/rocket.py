@@ -13,15 +13,13 @@ class Rocket:
         self.vel = Vector2(random.uniform(-1,1),random.uniform(-1,1)).normalize()
         self.acc = Vector2()
         self.dna = DNA(lifetime)
-        self.maxAcc=300
+        self.maxAcc=1
         self.maxVel=4
         self.count=0
         self.fitness = 0
         self.complete=False
 
     def calcFitness(self,target):
-
-
         if self.complete:
             self.fitness =100
         else:
@@ -48,6 +46,12 @@ class Rocket:
                 self.vel.scale_to_length(self.maxVel)
             self.pos+=self.vel
             self.acc = Vector2()
+
+    def mutation(self):
+        for i,v in enumerate(self.dna.gene):
+            if random.randint(0,100) < 1:
+                print("mutation")
+                self.dna.gene[i] = Vector2(random.uniform(-1,1),random.uniform(-1,1))
 
     def crossover(self, partner):
         gene = []
