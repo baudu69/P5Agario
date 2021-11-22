@@ -1,0 +1,69 @@
+import pygame
+
+from rectangle import Rectangle
+
+
+class QuadTree:
+    def __init__(self,boundary,capacity=5):
+        self.boundary = boundary
+        self.capacity=capacity
+        self.points = []
+        self.divided = False
+
+    def insert(self,point):
+        if not self.boundary.contains(point):
+            return
+        for p in self.points:
+            if p.x == point.x and p.y == point.y:
+                return
+
+        if not self.divided:
+            if len(self.points) < self.capacity:
+                self.points.append(point)
+            else:
+                self.subdivide()
+                self.points.append(point)
+                for p in self.points:
+                    self.northest.insert(p)
+                    self.northwest.insert(p)
+                    self.southest.insert(p)
+                    self.southwest.insert(p)
+                self.points = []
+        else:
+            self.northest.insert(point)
+            self.northwest.insert(point)
+            self.southest.insert(point)
+            self.southwest.insert(point)
+
+    def subdivide(self):
+
+        x = self.boundary.x
+        y = self.boundary.y
+        h = self.boundary.h
+        w = self.boundary.w
+
+        self.northest = QuadTree(Rectangle(x+w/2,y,w/2,h/2),self.capacity)
+        self.northwest= QuadTree(Rectangle(x,y,w/2,h/2),self.capacity)
+        self.southest = QuadTree(Rectangle(x+w/2,y+w/2,w/2,h/2),self.capacity)
+        self.southwest = QuadTree(Rectangle(x,y+w/2,w/2,h/2),self.capacity)
+        self.divided = True
+        print("sub")
+
+    def show(self,screen):
+        x = self.boundary.x
+        y = self.boundary.y
+        h = self.boundary.h
+        w = self.boundary.w
+        pygame.draw.rect(screen,(255,255,255),(x,y,w,h),1)
+
+
+        for p in self.points:
+            p.show(screen)
+
+        if self.divided:
+            self.northest.show(screen)
+            self.northwest.show(screen)
+            self.southest.show(screen)
+            self.southwest.show(screen)
+
+
