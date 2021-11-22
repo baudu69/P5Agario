@@ -12,7 +12,7 @@ from Salesperson.path import Path
 
 def setup():
     print("Setup START---------")
-    core.fps = 30
+    core.fps = 360
     core.WINDOW_SIZE = [800, 800]
 
     core.memory("cities", [])
@@ -76,7 +76,7 @@ def selection():
         parentB = copy.deepcopy(core.memory("matingpool")[random.randint(0, len(core.memory("matingpool")) - 1)])
         child = parentA.crossover(parentB)
         newPath = Path(child)
-        newPath.mutation(0.01)
+        newPath.mutation(0.05)
         newPopulation.append(newPath)
 
     core.memory('population', newPopulation)
@@ -90,6 +90,12 @@ def run():
 
     if core.getKeyPressList(pygame.K_r):
         reset()
+    if core.getMouseLeftClick():
+        for p in core.memory("population"):
+            p.dna.append(len(p.dna))
+        core.memory("cities").append(Vector2(core.getMouseLeftClick()[0],core.getMouseLeftClick()[1]))
+        core.memory("bestPath").append(len(core.memory("bestPath")))
+        core.memory("bestDistance", core.memory("bestDistance")+100000)
 
     for city in core.memory("cities"):
         pygame.draw.circle(core.screen, (255, 255, 255), city, 2)

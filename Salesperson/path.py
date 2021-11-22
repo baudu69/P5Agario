@@ -20,7 +20,7 @@ class Path:
         for i in range(0,len(self.dna)-1):
             dist+=cities[self.dna[i]].distance_to(cities[self.dna[i+1]])
 
-        self.fitness = 1/ (dist**2);
+        self.fitness = 1/ (pow(dist, 8) + 1)
 
     def crossover(self,partner):
         gene=[]
