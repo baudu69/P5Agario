@@ -23,7 +23,8 @@ class Rocket:
         if self.complete:
             self.fitness =100
         else:
-            self.fitness = 1 / target.distance_to(self.pos)
+            self.fitness =1 / (pow(target.distance_to(self.pos), 8) + 1)
+            #self.fitness = 1 / target.distance_to(self.pos)
 
     def applyFore(self,force):
         self.acc+=force

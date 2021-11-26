@@ -50,9 +50,14 @@ class Boid:
         self.acc+= self.se + self.co + al
 
 
-    def fear(self,obstacle):
+    def repultion(self,obstacle):
         obstacleVect = Vector2(obstacle[0], obstacle[1])
-        if obstacleVect.distance_to(self.pos) < self.perception*10:
+        if obstacleVect.distance_to(self.pos) < self.perception*2:
+            self.acc =   self.pos - obstacleVect
+
+    def attraction(self,obstacle):
+        obstacleVect = Vector2(obstacle[0], obstacle[1])
+        if obstacleVect.distance_to(self.pos) < self.perception*2:
             self.acc =   obstacleVect  - self.pos
 
 
@@ -64,7 +69,7 @@ class Boid:
         for other in boids:
             if self.pos.distance_to(other.pos) != 0:
                 diff = Vector2(other.pos.x-self.pos.x,other.pos.y-self.pos.y)
-                if diff.length() != 0:
+                if diff.length() > 0.001:
                     diff.scale_to_length(self.pos.distance_squared_to(other.pos))
                     boidscounter += 1
                     steering += diff
