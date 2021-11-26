@@ -11,7 +11,7 @@ def setup():
     core.WINDOW_SIZE = [800, 800]
 
     core.memory("boids", [])
-    core.memory("boidsNb",100)
+    core.memory("boidsNb",200)
 
     for i in range(0,core.memory("boidsNb")):
         core.memory("boids").append(Boid(random.randint(0,0)))
@@ -34,7 +34,11 @@ def run():
 
     for b in core.memory("boids"):
         if core.getMouseLeftClick():
-           b.fear(core.getMouseLeftClick())
+           b.repultion(core.getMouseLeftClick())
+
+        if core.getMouseRightClick():
+           b.attraction(core.getMouseRightClick())
+
         b.flock(core.memory("boids"))
         b.update()
         b.show(core.screen)
