@@ -137,9 +137,9 @@ class Boid:
     def show(self,screen):
         a = 0 - self.vel.angle_to(Vector2(0,1))
 
-        p1 = self.pos + Vector2(-5, 0).rotate(a)
-        p2 = self.pos + Vector2(0, 15).rotate(a)
-        p3 = self.pos + Vector2(5, 0).rotate(a)
+        p1 = self.pos + Vector2(-20, 0).rotate(a)
+        p2 = self.pos + Vector2(0, 55).rotate(a)
+        p3 = self.pos + Vector2(20, 0).rotate(a)
 
         pygame.draw.polygon(screen, colorFamily[self.family], ((p1), (p2), (p3)))
 

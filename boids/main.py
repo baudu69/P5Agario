@@ -8,7 +8,7 @@ from boids.boid import Boid
 def setup():
     print("Setup START---------")
     core.fps = 30
-    core.WINDOW_SIZE = [800, 800]
+    core.WINDOW_SIZE = [1000  , 1000]
 
     core.memory("boids", [])
     core.memory("boidsNb",200)
