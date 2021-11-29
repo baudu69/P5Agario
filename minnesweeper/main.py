@@ -1,9 +1,5 @@
 import random
 import time
-
-import pygame
-from pygame.math import Vector2
-
 import core
 from minnesweeper.case import Case
 
@@ -32,7 +28,7 @@ def revealAll():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
 
     if core.getMouseRightClick():
@@ -59,7 +55,7 @@ def run():
 
     for line in core.memory("grid"):
         for c in line:
-            c.show(core.screen)
+            c.show()
 
 
 def reset():

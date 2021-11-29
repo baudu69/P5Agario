@@ -1,9 +1,6 @@
 import random
 import threading
 import time
-
-import pygame
-from pygame.math import Vector2, Vector3
 import core
 
 
@@ -30,7 +27,7 @@ def quicksort(array,start,end):
     if start >= end:
         return
     index = partition(array,start,end)
-    time.sleep(0.02)
+    time.sleep(0.05)
     quicksort(array,start,index-1)
     quicksort(array, index+1, end)
 
@@ -41,7 +38,7 @@ def setup():
     core.WINDOW_SIZE = [800, 600]
 
 
-    core.memory("nb", int(800/6))
+    core.memory("nb", 400)
     core.memory("array", [i for i in range(0,core.memory("nb"))])
 
     random.shuffle(core.memory("array"))
@@ -55,15 +52,15 @@ def setup():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
-    if core.getKeyPressList(pygame.K_q):
+    if core.getKeyPressList("q"):
         core.memory("stop",True)
 
 
     for i,v in enumerate(core.memory("array")):
-        rect = [i*5+i,600-600*v/160,5,600*v/160]
-        pygame.draw.rect(core.screen,(255,255,255),rect)
+        rect = [i * (core.WINDOW_SIZE[0]/core.memory("nb")) + i, 600 - int(core.Math.map(v, 0, len(core.memory("array")), 0, 600)), (core.WINDOW_SIZE[0]/core.memory("nb")), int(core.Math.map(v, 0, len(core.memory("array")), 0, 600))]
+        core.Draw.rect((255,255,255),rect)
 
 def reset():
     core.memory("stop", True)

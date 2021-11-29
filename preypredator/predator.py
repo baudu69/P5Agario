@@ -1,7 +1,9 @@
 import random
 
-import pygame
 from pygame.math import Vector2
+
+import core
+
 
 class Predator:
     def __init__(self):
@@ -119,21 +121,21 @@ class Predator:
         if self.pos.y >= sizes[1]:
             self.vel.y *= -1
 
-    def show(self,screen):
+    def show(self):
         a = 0 - self.vel.angle_to(Vector2(0,1))
 
         p1 = self.pos + Vector2(-5, 0).rotate(a)
         p2 = self.pos + Vector2(0, 15).rotate(a)
         p3 = self.pos + Vector2(5, 0).rotate(a)
 
-        pygame.draw.polygon(screen, (255,0,0), ((p1), (p2), (p3)))
+        core.Draw.polygon( (255,0,0), ((p1), (p2), (p3)))
 
 
         if self.debug:
-            pygame.draw.line(screen,(255,255,255),self.pos,self.pos+self.co*50)
-            pygame.draw.line(screen, (255, 0, 0), self.pos, self.pos + self.se * 50)
-            pygame.draw.circle(screen,(255,255,255),self.pos,self.perception,1)
+            core.Draw.line((255,255,255),self.pos,self.pos+self.co*50)
+            core.Draw.line((255, 0, 0), self.pos, self.pos + self.se * 50)
+            core.Draw.circle((255,255,255),self.pos,self.perception,1)
             if self.prey:
-                pygame.draw.circle(screen, (255, 0, 0), self.prey.pos, 10, 1)
+                core.Draw.circle((255, 0, 0), self.prey.pos, 10, 1)
 
 

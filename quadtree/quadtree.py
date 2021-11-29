@@ -1,5 +1,4 @@
-import pygame
-
+import core
 from rectangle import Rectangle
 
 
@@ -49,22 +48,22 @@ class QuadTree:
         self.divided = True
         print("sub")
 
-    def show(self,screen):
+    def show(self):
         x = self.boundary.x
         y = self.boundary.y
         h = self.boundary.h
         w = self.boundary.w
-        pygame.draw.rect(screen,(255,255,255),(x,y,w,h),1)
+        core.Draw.rect((255,255,255),(x,y,w,h),1)
 
 
         for p in self.points:
-            p.show(screen)
+            p.show()
 
         if self.divided:
-            self.northest.show(screen)
-            self.northwest.show(screen)
-            self.southest.show(screen)
-            self.southwest.show(screen)
+            self.northest.show()
+            self.northwest.show()
+            self.southest.show()
+            self.southwest.show()
 
 
     def query(self, point, radius):

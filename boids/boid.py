@@ -1,7 +1,7 @@
 import random
-
-import pygame
 from pygame.math import Vector2
+
+import core
 
 colorFamily=[(255,0,0),(0,255,0),(0,0,255)]
 class Boid:
@@ -134,7 +134,7 @@ class Boid:
         if self.pos.y > sizes[1]:
             self.pos.y = 0
 
-    def show(self,screen):
+    def show(self):
         a = 0 - self.vel.angle_to(Vector2(0,1))
 
 
@@ -142,9 +142,9 @@ class Boid:
         p2 = self.pos + Vector2(0, 15).rotate(a)
         p3 = self.pos + Vector2(5, 0).rotate(a)
 
-        pygame.draw.polygon(screen, colorFamily[self.family], ((p1), (p2), (p3)))
+        core.Draw.polygon(colorFamily[self.family], ((p1), (p2), (p3)))
 
         if self.debug:
-            pygame.draw.line(screen,(255,255,255),self.pos,self.pos+self.co*50)
-            pygame.draw.line(screen, (255, 0, 0), self.pos, self.pos + self.se * 50)
+            core.Draw.line((255,255,255),self.pos,self.pos+self.co*50)
+            core.Draw.line((255, 0, 0), self.pos, self.pos + self.se * 50)
             #pygame.draw.circle(screen,(255,255,255),self.pos,self.perception,1)

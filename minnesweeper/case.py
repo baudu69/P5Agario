@@ -1,6 +1,8 @@
 import pygame.draw
 from pygame.math import Vector2
 
+import core
+
 
 class Case:
     def __init__(self,x,y):
@@ -58,21 +60,21 @@ class Case:
                 return self.bee,self.neighbor
         return None, None
 
-    def show(self,screen):
-        pygame.draw.rect(screen, (200, 200, 200), (self.pos.x * self.w, self.pos.y * self.w, self.w, self.w), 1)
+    def show(self):
+        core.Draw.rect((200, 200, 200), (self.pos.x * self.w, self.pos.y * self.w, self.w, self.w), 1)
 
         if self.mark:
             textsurface = self.myfont.render("x", False, (200, 200, 200))
-            screen.blit(textsurface, (self.pos.x * self.w + 15, self.pos.y * self.w + 5))
+            core.screen.blit(textsurface, (self.pos.x * self.w + 15, self.pos.y * self.w + 5))
         if self.revealed:
             if self.bee:
-                pygame.draw.rect(screen,(100,100,100),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w))
-                pygame.draw.circle(screen,(50,50,50),(self.pos.x*self.w+self.w/2,self.pos.y*self.w+self.w/2),10)
-                pygame.draw.rect(screen,(200,200,200),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w),1)
+                core.Draw.rect((100,100,100),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w))
+                core.Draw.circle((50,50,50),(self.pos.x*self.w+self.w/2,self.pos.y*self.w+self.w/2),10)
+                core.Draw.rect((200,200,200),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w),1)
             else:
-                pygame.draw.rect(screen,(100,100,100),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w))
-                pygame.draw.rect(screen,(200,200,200),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w),1)
+                core.Draw.rect((100,100,100),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w))
+                core.Draw.rect((200,200,200),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w),1)
                 if self.neighbor!=0:
                     textsurface = self.myfont.render(str(self.neighbor), False, (0, 0, 0))
-                    screen.blit(textsurface, (self.pos.x*self.w+15,self.pos.y*self.w+5))
+                    core.screen.blit(textsurface, (self.pos.x*self.w+15,self.pos.y*self.w+5))
 

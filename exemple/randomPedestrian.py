@@ -1,5 +1,4 @@
 import random
-import pygame
 from pygame.math import Vector2, Vector3
 import core
 
@@ -22,12 +21,12 @@ def setup():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         core.memory("bobPosition", Vector3(0, 0, 0))
         core.memory("bobHistorique", [])
 
     if len(core.memory("bobHistorique"))>1:
-        pygame.draw.lines(core.screen,(255,255,255),False,core.memory('bobHistorique'),3)
+        core.Draw.lines((255,255,255),False,core.memory('bobHistorique'),3)
 
     drawBob()
     moveBob()
@@ -44,7 +43,7 @@ def drawBob():
     p3.y = -p3.y
     p3 = p3 + core.memory("origine")
 
-    pygame.draw.polygon(core.screen, (255, 0, 0), ((p1), (p2), (p3)))
+    core.Draw.polygon((255, 0, 0), ((p1), (p2), (p3)))
 
 def moveBob():
     core.memory("bobHistorique").append(Vector2(core.memory("bobPosition").x,-core.memory("bobPosition").y)+ core.memory("origine"))

@@ -1,7 +1,9 @@
 import random
 
-import pygame
 from pygame.math import Vector2
+
+import core
+
 
 class Prey:
     def __init__(self):
@@ -88,7 +90,7 @@ class Prey:
             self.vel.y *= -1
             self.pos.y = sizes[1] - 10
 
-    def show(self,screen):
+    def show(self):
         a = 0 - self.vel.angle_to(Vector2(0,1))
 
         p1 = self.pos + Vector2(-5, 0).rotate(a)
@@ -96,11 +98,11 @@ class Prey:
         p3 = self.pos + Vector2(5, 0).rotate(a)
 
         if self.freeze:
-            pygame.draw.polygon(screen, (0,0,255), ((p1), (p2), (p3)))
+            core.Draw.polygon( (0,0,255), ((p1), (p2), (p3)))
         else:
-            pygame.draw.polygon(screen, (0,255,0), ((p1), (p2), (p3)))
+            core.Draw.polygon( (0,255,0), ((p1), (p2), (p3)))
 
         if self.debug:
-            pygame.draw.line(screen,(255,255,255),self.pos,self.pos+self.co*50)
-            pygame.draw.line(screen, (255, 0, 0), self.pos, self.pos + self.se * 50)
+            core.Draw.line((255,255,255),self.pos,self.pos+self.co*50)
+            core.Draw.line((255, 0, 0), self.pos, self.pos + self.se * 50)
             #pygame.draw.circle(screen,(255,255,255),self.pos,self.perception,1)

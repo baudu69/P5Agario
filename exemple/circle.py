@@ -1,5 +1,4 @@
 import random
-import pygame
 from pygame.math import Vector2
 import core
 
@@ -20,18 +19,18 @@ def setup():
 
 def run():
     core.cleanScreen()
-    pygame.draw.circle(core.screen, core.memory("couleurducercle"), core.memory("centredecercle"), core.memory("rayonducercle"))
+    core.Draw.circle(core.memory("couleurducercle"), core.memory("centredecercle"), core.memory("rayonducercle"))
 
-    if core.getKeyPressList(pygame.K_r) :
+    if core.getKeyPressList("r") :
         core.memory("direction", Vector2(0, 0))
 
-    if core.getKeyPressList(pygame.K_z) :
+    if core.getKeyPressList("z") :
         core.memory("direction", Vector2(core.memory("direction").x, -1))
-    if core.getKeyPressList(pygame.K_s) :
+    if core.getKeyPressList("s") :
         core.memory("direction", Vector2(core.memory("direction").x, 1))
-    if core.getKeyPressList(pygame.K_q) :
+    if core.getKeyPressList("q") :
         core.memory("direction", Vector2(-1,core.memory("direction").y))
-    if core.getKeyPressList(pygame.K_d) :
+    if core.getKeyPressList("d") :
         core.memory("direction", Vector2(1,core.memory("direction").y))
 
     if core.memory("centredecercle").y  < 0  or core.memory("centredecercle").y > core.WINDOW_SIZE[1] :

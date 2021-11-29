@@ -1,12 +1,7 @@
 import copy
-import math
 import random
-import sys
-
-import pygame
-from pygame.math import Vector2
-
 import core
+from pygame.math import Vector2
 from Salesperson.path import Path
 
 
@@ -88,8 +83,9 @@ def run():
     evaluate()
     selection()
 
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
+
     if core.getMouseLeftClick():
         for p in core.memory("population"):
             p.dna.append(len(p.dna))
@@ -98,13 +94,13 @@ def run():
         core.memory("bestDistance", core.memory("bestDistance")+100000)
 
     for city in core.memory("cities"):
-        pygame.draw.circle(core.screen, (255, 255, 255), city, 2)
+        core.Draw.circle((255, 255, 255), city, 2)
 
     bestPathOrder = []
     for i in core.memory("bestPath"):
         bestPathOrder.append(core.memory("cities")[i])
 
-    pygame.draw.lines(core.screen, (200, 0, 0), False, bestPathOrder, 2)
+    core.Draw.lines((200, 0, 0), False, bestPathOrder, 2)
 
 
 def reset():

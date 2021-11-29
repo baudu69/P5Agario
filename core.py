@@ -6,6 +6,8 @@ from types import FrameType
 
 import pygame
 
+import core
+
 screenCleen = True
 runfuntion = None
 setupfunction = None
@@ -71,8 +73,9 @@ def getkeyPress():
 
 def getKeyPressList(value):
     if keyPressList is not None:
-        if len(keyPressList) > value:
-            return keyPressList[value] == 1
+        key = getattr(pygame,'K_'+str(value))
+        if len(keyPressList) > key:
+            return keyPressList[key] == 1
     return False
 
 def getkeyPressValue():
@@ -172,3 +175,32 @@ def main(setupf, runf):
         # print(clock.get_time())
         # Go ahead and update the screen with what we 've drawn.
         pygame.display.flip()
+
+class Math:
+    def map(value, istart, istop, ostart, ostop):
+      return ostart + (ostop - ostart) * ((value - istart) / (istop - istart))
+
+class Draw:
+    def rect(color,rect,width=0):
+        pygame.draw.rect(core.screen,color,rect,width)
+
+    def circle(color,center,radius,width=0):
+        pygame.draw.circle(core.screen,color,center,radius,width)
+
+    def polyline(color,points,width=0):
+        pygame.draw.polygon(core.screen,color,points,width)
+
+    def line(color, start_pos, end_pos, width=1):
+        pygame.draw.line(core.screen,color,start_pos,end_pos,width)
+
+    def ellipse(color, rect, width=0):
+        pygame.draw.ellipse(core.screen,color,rect,width)
+
+    def arc(color, rect, start_angle, stop_angle, width=1):
+        pygame.draw.arc(core.screen,color,rect,start_angle,stop_angle,width)
+
+    def lines(color, closed, points, width=1):
+        pygame.draw.lines(core.screen,color,closed,points,width)
+
+    def polygon(color, points, width=0):
+        pygame.draw.polygon(core.screen,color,points,width)

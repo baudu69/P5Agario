@@ -1,8 +1,6 @@
 import random
 
-import pygame
 from pygame.math import Vector2
-
 import core
 
 from rocket import Rocket
@@ -66,7 +64,7 @@ def run():
         rocket.update(core.memory("target"))
         rocket.show(core.screen)
 
-    pygame.draw.circle(core.screen,(255,0,0),core.memory("target"),20)
+    core.Draw.circle((255,0,0),core.memory("target"),20)
 
 
 

@@ -1,8 +1,5 @@
-import random
-import pygame
-from pygame.math import Vector2
+
 import core
-from boids.boid import Boid
 from preypredator.predator import Predator
 from preypredator.prey import Prey
 
@@ -36,7 +33,7 @@ def reset():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
 
     for prey in core.memory("preys"):
@@ -50,7 +47,7 @@ def run():
 
         prey.computeForce(core.memory("predators"))
         prey.update()
-        prey.show(core.screen)
+        prey.show()
 
     for predator in core.memory("predators"):
         if core.getMouseLeftClick():
@@ -63,7 +60,7 @@ def run():
         predator.computeForce(core.memory("preys"),core.memory("predators"))
         predator.edge(core.WINDOW_SIZE)
         predator.update()
-        predator.show(core.screen)
+        predator.show()
 
 
 core.main(setup, run)

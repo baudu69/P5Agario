@@ -1,9 +1,8 @@
 import random
 from math import floor
-
-import pygame
 from pygame.math import Vector2
 
+import core
 from dna import DNA
 
 
@@ -72,4 +71,4 @@ class Rocket:
         bl = self.pos + Vector2(-2,0).rotate(a)
         br = self.pos + Vector2(2,0).rotate(a)
 
-        pygame.draw.polygon(screen,(255,255,255),(tl,tr,br,bl))
+        core.Draw.polygon((255,255,255),(tl,tr,br,bl))

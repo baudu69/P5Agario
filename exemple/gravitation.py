@@ -1,5 +1,4 @@
 import random
-import pygame
 from pygame.math import Vector2
 import core
 
@@ -24,7 +23,7 @@ class Paricule:
         self.pos+=self.vel
 
     def show(self,screen):
-        pygame.draw.circle(screen,self.color,self.pos,5)
+        core.Draw.circle(self.color,self.pos,5)
 
 
 def setup():
@@ -53,7 +52,7 @@ def reset():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
     if core.getMouseLeftClick():
         core.memory("Centre",Vector2(core.getMouseLeftClick()))
@@ -66,10 +65,10 @@ def run():
         u=u*9.8*(p.mass*core.memory("mass"))/p.pos.distance_to(core.memory("Centre"))**2
         p.applyforce(u)
         p.update()
-        pygame.draw.line(core.screen,(255,0,0),p.pos,p.pos+u,1)
+        core.Draw.line((255,0,0),p.pos,p.pos+u,1)
 
     for p in core.memory("particules"):
         p.show(core.screen)
-    pygame.draw.circle(core.screen, (255,255,255),core.memory("Centre"),core.memory("rayon"))
+    core.Draw.circle((255,255,255),core.memory("Centre"),core.memory("rayon"))
 
 core.main(setup, run)

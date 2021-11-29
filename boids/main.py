@@ -1,6 +1,4 @@
 import random
-import pygame
-from pygame.math import Vector2
 import core
 from boids.boid import Boid
 
@@ -30,7 +28,7 @@ def reset():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
 
     for b in core.memory("boids"):
@@ -42,7 +40,7 @@ def run():
 
         b.flock(core.memory("boids"))
         b.update()
-        b.show(core.screen)
+        b.show()
         b.edge(core.WINDOW_SIZE)
 
 core.main(setup, run)

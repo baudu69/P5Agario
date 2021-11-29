@@ -1,8 +1,4 @@
 import random
-
-import pygame
-from pygame.math import Vector2
-
 import core
 from point2d import Point2d
 from quadtree import QuadTree
@@ -28,10 +24,10 @@ def setup():
 
 def run():
     core.cleanScreen()
-    if core.getKeyPressList(pygame.K_r):
+    if core.getKeyPressList("r"):
         reset()
-    core.memory("quadtree").show(core.screen)
-    pygame.draw.circle(core.screen,(0,0,255),core.memory("query")['point'].toArray(),core.memory("query")['r'],1)
+    core.memory("quadtree").show()
+    core.Draw.circle((0,0,255),core.memory("query")['point'].toArray(),core.memory("query")['r'],1)
 
     if core.getMouseLeftClick():
         print(core.getMouseLeftClick())
@@ -43,7 +39,7 @@ def run():
         core.memory("found", f)
 
     for p in core.memory("found"):
-        p.show(core.screen,(255,0,255))
+        p.show((255,0,255))
 
 
 

@@ -1,5 +1,4 @@
 import random
-import pygame
 from pygame.math import Vector2
 import core
 
@@ -34,7 +33,7 @@ def update():
 def show():
     core.cleanScreen()
     for drop in drops:
-        pygame.draw.line(core.screen, (255, 0, 255), (drop.x, drop.y), (drop.x, drop.y + 10), 1)
+        core.Draw.line((255, 0, 255), (drop.x, drop.y), (drop.x, drop.y + 10), 1)
 
 
 core.main(setup, run)
