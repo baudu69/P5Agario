@@ -7,6 +7,9 @@ import pygame
 
 import core
 
+
+title = "Fenetre"
+bgColor=(0,0,0)
 screenCleen = True
 runfuntion = None
 setupfunction = None
@@ -48,6 +51,13 @@ def memory(key, value=None):
             sys.stderr.write("ERREUR : Nom de variable inconnue : " + key)
             sys.exit()
 
+
+def setTitle(t):
+    global title
+    title = t
+def setBgColor(c):
+    global bgColor
+    bgColor = c
 
 def noLoop():
     global loopLock
@@ -96,7 +106,7 @@ def setup():
     screen = pygame.display.set_mode(WINDOW_SIZE)
 
     # Set title of screen
-    pygame.display.set_caption("Window")
+    pygame.display.set_caption(title)
 
 
 def run():
@@ -123,7 +133,8 @@ def main(setupf, runf):
         if not loopLock:
             if screenCleen:
                 screenCleen = False
-                screen.fill(0)
+                screen.fill(bgColor)
+                pygame.display.set_caption(title)
             run()
 
         for event in pygame.event.get():  # User did something
