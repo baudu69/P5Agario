@@ -1,6 +1,7 @@
 import random
 
 from pygame.math import Vector2
+
 import core
 
 from rocket import Rocket
@@ -10,7 +11,7 @@ def setup():
     core.fps = 30
     core.WINDOW_SIZE = [800, 600]
 
-    core.memory("target",Vector2(400,100))
+    core.memory("target", Vector2(400, 100))
     core.memory("matingpool",[])
 
     restart()

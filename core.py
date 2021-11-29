@@ -1,8 +1,7 @@
 import inspect
 import sys
-import time
-from typing import cast
-from types import FrameType
+from math import *
+from random import *
 
 import pygame
 
@@ -204,3 +203,6 @@ class Draw:
 
     def polygon(color, points, width=0):
         pygame.draw.polygon(core.screen,color,points,width)
+
+
+

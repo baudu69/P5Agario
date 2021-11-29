@@ -2,6 +2,7 @@ import random
 from math import floor
 from pygame.math import Vector2
 
+
 import core
 from dna import DNA
 
