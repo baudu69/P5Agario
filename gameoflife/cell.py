@@ -49,7 +49,7 @@ class Cell:
                 self.occupied = not self.occupied
 
     def show(self):
-        core.Draw.rect((0, 0, 0), (self.pos.x * self.w, self.pos.y * self.w, self.w, self.w), 1)
+        #core.Draw.rect((0, 0, 0), (self.pos.x * self.w, self.pos.y * self.w, self.w, self.w), 1)
         if self.occupied:
             core.Draw.rect((0,0,0),(self.pos.x*self.w,self.pos.y*self.w,self.w,self.w))
 

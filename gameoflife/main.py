@@ -9,11 +9,11 @@ from minnesweeper.case import Case
 def setup():
     print("Setup START---------")
 
-    core.fps = 30
+    core.fps = 120
     core.WINDOW_SIZE = [800, 800]
-    core.memory("width", int(800/40))
-    core.memory("height", int(800/40))
-    core.memory("proba",20) # /100
+    core.memory("width", int(800/10))
+    core.memory("height", int(800/10))
+    core.memory("proba",40) # /100
     core.memory("run", False)
 
     core.memory("generation", 0)
@@ -63,7 +63,6 @@ def run():
             c.show()
 
     if core.memory("run"):
-        time.sleep(0.2)
         core.memory("generation",core.memory("generation")+1)
         for line in grid:
             for c in line:

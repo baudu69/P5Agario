@@ -9,8 +9,8 @@ def setup():
     core.WINDOW_SIZE = [400, 400]
 
     core.memory("centredecercle", Vector2(100,200))
-    core.memory("rayonducercle", 10)
-    core.memory("couleurducercle", (255, 0, 0))
+    core.memory("rayonducercle", 100)
+    core.memory("couleurducercle", (255, 0, 0, 127))
 
     core.memory("direction" ,Vector2(0,0))
 
@@ -19,7 +19,15 @@ def setup():
 
 def run():
     core.cleanScreen()
-    core.Draw.circle(core.memory("couleurducercle"), core.memory("centredecercle"), core.memory("rayonducercle"))
+    #core.Draw.circle(core.memory("couleurducercle"), core.memory("centredecercle"), core.memory("rayonducercle"),10)
+    #core.Draw.circle((255, 0, 0),(100,100), core.memory("rayonducercle"),10)
+
+    core.Draw.rect((255,0,0,125),(100,100,10,10))
+    core.Draw.rect((255,0,0),(110,100,10,10))
+
+    core.Draw.ellipse((255,255,0,127),(100,100,100,100))
+    core.Draw.ellipse((255,255,0),(300,100,100,100))
+
 
     if core.getKeyPressList("r") :
         core.memory("direction", Vector2(0, 0))

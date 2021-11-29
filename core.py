@@ -104,7 +104,6 @@ def setup():
 
     global screen
     screen = pygame.display.set_mode(WINDOW_SIZE)
-
     # Set title of screen
     pygame.display.set_caption(title)
 
@@ -192,10 +191,21 @@ class Math:
 
 class Draw:
     def rect(color,rect,width=0):
-        pygame.draw.rect(core.screen,color,rect,width)
+        if len(color)>3:
+            shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
+            pygame.draw.rect(shape_surf, color, shape_surf.get_rect())
+            core.screen.blit(shape_surf, rect)
+        else:
+            pygame.draw.rect(core.screen,color,rect,width)
 
     def circle(color,center,radius,width=0):
-        pygame.draw.circle(core.screen,color,center,radius,width)
+        if len(color)>3:
+            target_rect = pygame.Rect(center, (0, 0)).inflate((radius * 2, radius * 2))
+            shape_surf = pygame.Surface(target_rect.size, pygame.SRCALPHA)
+            pygame.draw.circle(shape_surf, color, (radius, radius), radius, width)
+            core.screen.blit(shape_surf, target_rect)
+        else:
+            pygame.draw.circle(core.screen,color,center,radius,width)
 
     def polyline(color,points,width=0):
         pygame.draw.polygon(core.screen,color,points,width)
@@ -204,7 +214,13 @@ class Draw:
         pygame.draw.line(core.screen,color,start_pos,end_pos,width)
 
     def ellipse(color, rect, width=0):
-        pygame.draw.ellipse(core.screen,color,rect,width)
+
+        if len(color)>3:
+            shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
+            pygame.draw.ellipse(shape_surf, color, shape_surf.get_rect(),width)
+            core.screen.blit(shape_surf, rect)
+        else:
+            pygame.draw.ellipse(core.screen,color,rect,width)
 
     def arc(color, rect, start_angle, stop_angle, width=1):
         pygame.draw.arc(core.screen,color,rect,start_angle,stop_angle,width)
@@ -213,7 +229,15 @@ class Draw:
         pygame.draw.lines(core.screen,color,closed,points,width)
 
     def polygon(color, points, width=0):
-        pygame.draw.polygon(core.screen,color,points,width)
+        if len(color) > 3:
+            lx, ly = zip(*points)
+            min_x, min_y, max_x, max_y = min(lx), min(ly), max(lx), max(ly)
+            target_rect = pygame.Rect(min_x, min_y, max_x - min_x, max_y - min_y)
+            shape_surf = pygame.Surface(target_rect.size, pygame.SRCALPHA)
+            pygame.draw.polygon(shape_surf, color, [(x - min_x, y - min_y) for x, y in points])
+            core.screen.blit(shape_surf, target_rect)
+        else:
+            pygame.draw.polygon(core.screen,color,points,width)
 
 
 
