@@ -1,3 +1,4 @@
+import copy
 import inspect
 import sys
 from math import *
@@ -28,6 +29,7 @@ keyPressValue = None
 keyReleaseValue = None
 keyPressList = None
 memoryStorage = {}
+keyReleaseList=None
 
 def printMemory():
     print("--------------MEMORY:-------------------")
@@ -87,6 +89,13 @@ def getKeyPressList(value):
             return keyPressList[key] == 1
     return False
 
+def getKeyReleaseList(value):
+    if keyReleaseList is not None:
+        key = getattr(pygame,'K_'+str(value))
+        if len(keyReleaseList) > key:
+            return keyReleaseList[key] != 0
+    return False
+
 def getkeyPressValue():
     return keyPressValue
 
@@ -119,7 +128,7 @@ def main(setupf, runf):
     runfuntion = runf
     global setupfunction
     setupfunction = setupf
-    global keyPressList,screenCleen, mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue,screen
+    global keyPressList,keyReleaseList,screenCleen, mouseclickleft, mouseclickL, mouseclickright, mouseclickR, keyPress, keyPressValue, keyReleaseValue,screen
 
     setup()
 
@@ -136,6 +145,9 @@ def main(setupf, runf):
                 pygame.display.set_caption(title)
             run()
 
+        if keyReleaseList is not None:
+            keyReleaseList = [i - 1 if i > 0 else 0 for i in keyReleaseList]
+
         for event in pygame.event.get():  # User did something
             if event.type == pygame.QUIT:  # If user clicked close
                 done = True  # Flag that we are done so we exit this loop
@@ -143,9 +155,21 @@ def main(setupf, runf):
             elif event.type == pygame.KEYDOWN:
                 keyPress = True
                 keyPressValue = event.key
+
                 
             elif event.type == pygame.KEYUP:
                 keyPressValue = None
+                if keyReleaseList is None:
+                    keyReleaseList=[0 for i in keyPressList]
+
+                for i,k in enumerate(keyPressList):
+                    if k == True and event.scancode == i:
+                        keyReleaseList[event.key]=1
+
+
+
+
+
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -171,12 +195,18 @@ def main(setupf, runf):
                 if mouseclickR:
                     mouseclickright = event.pos
 
+
+
             if hasattr(event, 'key'):
+
+
                 keyPressList = pygame.key.get_pressed()
+
                 if keyPressValue:
                     keyReleaseValue = event.key
                 else:
                     keyReleaseValue = None
+
 
         clock.tick(fps)
 
