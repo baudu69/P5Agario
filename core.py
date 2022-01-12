@@ -268,6 +268,11 @@ class Draw:
             core.screen.blit(shape_surf, target_rect)
         else:
             pygame.draw.polygon(core.screen,color,points,width)
+    def text(color, texte, position, taille=30, font='Comic Sans MS'):
+        pygame.font.init()
+        myfont = pygame.font.SysFont('Comic Sans MS', 30)
+        textsurface = myfont.render(texte, False, color)
+        screen.blit(textsurface, position)
 
 
 
