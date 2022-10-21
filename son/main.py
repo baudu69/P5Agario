@@ -19,7 +19,7 @@ def run():
         core.memory("son").start()
 
     if core.getKeyPressList("r"):
-        core.memory("son").stop()
+        core.memory("son").rewind()
 
     if core.getKeyReleaseList("p"):
         core.memory("son").pause()
