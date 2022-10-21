@@ -301,6 +301,10 @@ class Sound:
             self.play = True
             self.thread=threading.Thread(target=self.playin(), args=(1,))
 
+    def rewind(self):
+        if self.play:
+            pygame.mixer.music.rewind()
+
     def pause(self):
         if self.play:
             self.play = False
