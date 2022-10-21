@@ -1,8 +1,11 @@
 import copy
 import inspect
 import sys
+import time
 from math import *
 from random import *
+import os
+import threading
 
 import pygame
 
@@ -279,6 +282,44 @@ class Draw:
         myfont = pygame.font.SysFont('Comic Sans MS', 30)
         textsurface = myfont.render(texte, False, color)
         screen.blit(textsurface, position)
+
+
+class Sound:
+
+    def __init__(self,url):
+        self.ready = False
+        self.url = url
+        self.play=False
+        self.thread=None
+        if self.url!="":
+            pygame.mixer.pre_init(44100, -16, 2, 2048)
+            pygame.mixer.init()
+            pygame.mixer.music.load(url)
+
+    def start(self):
+        if not self.play:
+            self.play = True
+            self.thread=threading.Thread(target=self.playin(), args=(1,))
+
+    def pause(self):
+        if self.play:
+            self.play = False
+            pygame.mixer.music.pause()
+        else:
+            self.play = True
+            pygame.mixer.music.unpause()
+
+
+    def stop(self):
+        if self.play:
+            self.play = False
+            pygame.mixer.music.stop()
+
+
+
+    def playin(self):
+        pygame.mixer.music.play()
+        print("playin")
 
 
 class Texture:
