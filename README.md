@@ -76,7 +76,7 @@ You get a black screen of 400x400 pixel with a white circle.
 - core.Draw.arc(color, rect, start_angle, stop_angle, width)
 - core.Draw.lines(color, closed, points, width)
 - core.Draw.polygon(color, points, width)
-- core.Draw.text(color, texte, position, size, font)
+- core.Draw.text(color, text, position, size, font)
 
 ### Color :
 colors are defined by tuples of 3 or 4 elements : (R,G,B) or (R,G,B,A)
