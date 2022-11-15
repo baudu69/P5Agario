@@ -99,7 +99,7 @@ def setup():
     print("Setup START---------")
     core.fps = 30
     core.WINDOW_SIZE = [400, 400]
-	core.memory("position",(200,200))
+    core.memory("position",(200,200))
     print("Setup END-----------")
 
 
