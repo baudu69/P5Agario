@@ -220,23 +220,36 @@ The travelling salesman problem (also called the travelling salesperson problem 
 - "r" : restart
 
 ## Boids
+
+![image](https://user-images.githubusercontent.com/941908/201973506-a714eae7-6bef-4711-913b-c45101a95f73.png)
+
+
 Boids is an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds. His paper on this topic was published in 1987 in the proceedings of the ACM SIGGRAPH conference. The name "boid" corresponds to a shortened version of "bird-oid object", which refers to a bird-like object. "Boid" is also a New York Metropolitan dialect pronunciation for "bird." 
 - mouse left click : replustion
 - mouse right click : attraction
 - "r" : restart
 
 ## Game of life 
+
+![image](https://user-images.githubusercontent.com/941908/201973583-1938fa6c-7fa3-4afd-94d4-6dc5b7add1f6.png)
+
 The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.It is a zero-player game meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. 
 - "r" : restart
 - SPACE : start / pause
 
 
 ## Minesweeper
+
+![image](https://user-images.githubusercontent.com/941908/201973696-1d4e7046-3a38-41e3-ad9e-09eedb2f12a9.png)
+
 Minesweeper is a logic puzzle video game genre generally played on personal computers. The game features a grid of clickable squares, with hidden "mines" scattered throughout the board. The objective is to clear the board without detonating any mines, with help from clues about the number of neighboring mines in each field.
 - left click : reveal case
 - right click : mark as mine
 
 ## Quadtree
+
+![image](https://user-images.githubusercontent.com/941908/201973893-c95e82bf-f6c1-4185-94bd-ab30fd18ddde.png)
+
 A quadtree is a tree data structure in which each internal node has exactly four children. Quadtrees are the two-dimensional analog of octrees and are most often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions. The data associated with a leaf cell varies by application, but the leaf cell represents a "unit of interesting spatial information". 
 - left click : add point
 - right click : select area
