@@ -99,7 +99,7 @@ def setup():
     print("Setup START---------")
     core.fps = 30
     core.WINDOW_SIZE = [400, 400]
-    core.memory("position",(200,200))
+	core.memory("position",(200,200))
     print("Setup END-----------")
 
 
@@ -110,4 +110,106 @@ def run():
 core.main(setup, run)
 
 ```
+
+## Input
+### Keybord
+it is possible to detect the typing of one or more keys on the keyboard.
+- press:
+
+```python
+import core
+
+
+def setup():
+    print("Setup START---------")
+    core.fps = 30
+    core.WINDOW_SIZE = [400, 400]
+    print("Setup END-----------")
+
+
+def run():
+    core.cleanScreen()
+	if core.getKeyPressList("SPACE"):
+		core.Draw.circle((255,255,255),(200,200),10)
+
+core.main(setup, run)
+
+```
+
+- release:
+
+```python
+import core
+
+
+def setup():
+    print("Setup START---------")
+    core.fps = 30
+    core.WINDOW_SIZE = [400, 400]
+    print("Setup END-----------")
+
+
+def run():
+    core.cleanScreen()
+    if core.getKeyReleaseList("SPACE"):
+        core.Draw.circle((255,255,255),(200,200),10)
+
+core.main(setup, run)
+
+```
+### Mouse
+It is possible to interact with the mouse:
+```python
+import core
+
+
+def setup():
+    print("Setup START---------")
+    core.fps = 30
+    core.WINDOW_SIZE = [400, 400]
+    core.memory("Center", Vector2(200,200))
+    print("Setup END-----------")
+
+
+def run():
+    core.cleanScreen()
+    if core.getMouseLeftClick():
+        core.memory("Centre",Vector2(core.getMouseLeftClick()))
+    
+    core.Draw.circle((255,255,255),core.memory("Center"), 10)
+	
+core.main(setup, run)
+
+```
+
+
+
+## Texture
+It is possible to display textures and its box.
+The following example displays the image "soleil.png". 
+
+```python
+from pygame.math import Vector2
+import core
+
+def setup():
+    print("Setup START---------")
+    core.fps = 60
+    core.WINDOW_SIZE = [400, 400]
+    core.memory("texture",core.Texture("./soleil.png",Vector2(200,200)))
+    print("Setup END-----------")
+
+
+def run():
+    core.cleanScreen()
+    if not core.memory("texture").ready:
+        core.memory("texture").load()
+		
+    core.memory("texture").box = True #Display box
+    core.memory("texture").show()
+
+core.main(setup, run)
+
+```
+
 
