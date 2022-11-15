@@ -212,4 +212,37 @@ core.main(setup, run)
 
 ```
 
+# Example 
+## Salesperson
+The travelling salesman problem (also called the travelling salesperson problem or TSP) asks the following question: "Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once.
+
+- mouse click : add new point
+- "r" : restart
+
+## Boids
+Boids is an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds. His paper on this topic was published in 1987 in the proceedings of the ACM SIGGRAPH conference. The name "boid" corresponds to a shortened version of "bird-oid object", which refers to a bird-like object. "Boid" is also a New York Metropolitan dialect pronunciation for "bird." 
+- mouse left click : replustion
+- mouse right click : attraction
+- "r" : restart
+
+## Game of life 
+The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.It is a zero-player game meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. 
+- "r" : restart
+- SPACE : start / pause
+
+
+## Minesweeper
+Minesweeper is a logic puzzle video game genre generally played on personal computers. The game features a grid of clickable squares, with hidden "mines" scattered throughout the board. The objective is to clear the board without detonating any mines, with help from clues about the number of neighboring mines in each field.
+- left click : reveal case
+- right click : mark as mine
+
+## Quadtree
+A quadtree is a tree data structure in which each internal node has exactly four children. Quadtrees are the two-dimensional analog of octrees and are most often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions. The data associated with a leaf cell varies by application, but the leaf cell represents a "unit of interesting spatial information". 
+- left click : add point
+- right click : select area
+
+
+## Other
+Feel free to explore other examples
+
 
