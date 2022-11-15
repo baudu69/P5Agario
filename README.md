@@ -129,8 +129,8 @@ def setup():
 
 def run():
     core.cleanScreen()
-	if core.getKeyPressList("SPACE"):
-		core.Draw.circle((255,255,255),(200,200),10)
+    if core.getKeyPressList("SPACE"):
+	core.Draw.circle((255,255,255),(200,200),10)
 
 core.main(setup, run)
 
