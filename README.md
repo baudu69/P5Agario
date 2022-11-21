@@ -83,9 +83,9 @@ colors are defined by tuples of 3 or 4 elements : (R,G,B) or (R,G,B,A)
 
 
 ## Variables
-You can use python variables and their operations. However, if you want to keep data over time and between frames, you have to use global variables. 
+You can use python variables and their operations. However, if you want to keep data over time and between frames, you must use global variables. 
 
-To make it easier to understand the code and to manipulate the data, P5 provides a way to keep the data as dictionary:
+To make it easier to understand the code and to manipulate data, P5 provides a way to keep data as dictionary:
 ```python
 core.memory(key,value)
 ```
