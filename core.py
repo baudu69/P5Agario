@@ -1,11 +1,8 @@
 import copy
 import inspect
 import sys
-import time
 from math import *
 from random import *
-import os
-import threading
 
 import pygame
 
@@ -42,7 +39,7 @@ def printMemory():
     print("\n")
 
 
-def memory(key, value=None):
+def memory(key: object, value: object = None) -> object:
     global memoryStorage
     if " " in key:
         sys.stderr.write("ERREUR : Espace interdit dans les noms de variable : " + key + "\n")
@@ -277,53 +274,11 @@ class Draw:
         else:
             pygame.draw.polygon(core.screen, color, points, width)
 
-    def text(color, texte, position, taille=30, font='Comic Sans MS'):
+    def text(color, texte, position, taille=30, font='Arial'):
         pygame.font.init()
-        myfont = pygame.font.SysFont('Comic Sans MS', 30)
+        myfont = pygame.font.SysFont(font, taille)
         textsurface = myfont.render(texte, False, color)
         screen.blit(textsurface, position)
-
-
-class Sound:
-
-    def __init__(self,url):
-        self.ready = False
-        self.url = url
-        self.play=False
-        self.thread=None
-        if self.url!="":
-            pygame.mixer.pre_init(44100, -16, 2, 2048)
-            pygame.mixer.init()
-            pygame.mixer.music.load(url)
-
-    def start(self):
-        if not self.play:
-            self.play = True
-            self.thread=threading.Thread(target=self.playin(), args=(1,))
-
-    def rewind(self):
-        if self.play:
-            pygame.mixer.music.rewind()
-
-    def pause(self):
-        if self.play:
-            self.play = False
-            pygame.mixer.music.pause()
-        else:
-            self.play = True
-            pygame.mixer.music.unpause()
-
-
-    def stop(self):
-        if self.play:
-            self.play = False
-            pygame.mixer.music.stop()
-
-
-
-    def playin(self):
-        pygame.mixer.music.play()
-        print("playin")
 
 
 class Texture:
@@ -335,7 +290,7 @@ class Texture:
         self.h = None
         self.pos = pos
         self.scaleSize = scaleSize
-        self.angle = pygame.Vector2()
+        self.angle = 0
         self.offset = offset
         self.display = display
         self.alpha=alpha
@@ -355,6 +310,9 @@ class Texture:
                 core.Draw.rect((0,255,0),(self.pos.x,self.pos.y,self.w,self.h),1)
             if self.ready:
                 self.sprit.set_alpha(self.alpha)
-                core.screen.blit(self.sprit, self.pos)
+                rotated_image = pygame.transform.rotate(self.sprit, self.angle)
+                new_rect = rotated_image.get_rect(center=self.sprit.get_rect(topleft=self.pos).center)
+
+                core.screen.blit(rotated_image, new_rect)
 
 
