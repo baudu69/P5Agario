@@ -29,6 +29,12 @@ keyReleaseValue = None
 keyPressList = None
 memoryStorage = {}
 keyReleaseList = None
+fullscreen = False
+
+def setFullScreen(a):
+    global fullscreen
+    fullscreen=a
+
 
 
 def printMemory():
@@ -120,7 +126,13 @@ def setup():
         setupfunction()
 
     global screen
-    screen = pygame.display.set_mode(WINDOW_SIZE)
+    if not fullscreen:
+        screen = pygame.display.set_mode(WINDOW_SIZE)
+    else:
+        screen = pygame.display.set_mode(
+            WINDOW_SIZE,
+            pygame.FULLSCREEN
+        )
     # Set title of screen
     pygame.display.set_caption(title)
 
@@ -151,6 +163,7 @@ def main(setupf, runf):
                 screenCleen = False
                 screen.fill(bgColor)
                 pygame.display.set_caption(title)
+
             run()
 
         if keyReleaseList is not None:
