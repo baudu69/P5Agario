@@ -23,6 +23,7 @@ def run():
     if core.getKeyPressList("b"):
         core.memory("texture").box = not core.memory("texture").box
         time.sleep(0.1)
+        core.memory("texture").angle+=5
     core.memory("texture").show()
 
 core.main(setup, run)
