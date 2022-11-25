@@ -31,11 +31,6 @@ memoryStorage = {}
 keyReleaseList = None
 fullscreen = False
 
-def setFullScreen(a):
-    global fullscreen
-    fullscreen=a
-
-
 
 def printMemory():
     print("--------------MEMORY:-------------------")
