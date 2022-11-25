@@ -31,7 +31,6 @@ memoryStorage = {}
 keyReleaseList = None
 fullscreen = False
 
-
 def printMemory():
     print("--------------MEMORY:-------------------")
     for k, v in memoryStorage.items():
@@ -125,9 +124,10 @@ def setup():
         screen = pygame.display.set_mode(WINDOW_SIZE)
     else:
         screen = pygame.display.set_mode(
-            WINDOW_SIZE,
+            (0,0),
             pygame.FULLSCREEN
         )
+        WINDOW_SIZE = (screen.get_size())
     # Set title of screen
     pygame.display.set_caption(title)
 
