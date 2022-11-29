@@ -251,10 +251,22 @@ class Draw:
             pygame.draw.circle(core.screen, color, center, radius, width)
 
     def polyline(color, points, width=0):
-        pygame.draw.polygon(core.screen, color, points, width)
+        if len(color) > 3:
+            surface = screen.convert_alpha()
+            surface.fill([0, 0, 0, 0])
+            pygame.draw.polygon(surface, color, points, width)
+            screen.blit(surface, (0, 0))
+        else:
+            pygame.draw.polygon(core.screen, color, points, width)
 
     def line(color, start_pos, end_pos, width=1):
-        pygame.draw.line(core.screen, color, start_pos, end_pos, width)
+        if len(color) > 3:
+            surface = screen.convert_alpha()
+            surface.fill([0, 0, 0, 0])
+            pygame.draw.line(surface, color, start_pos, end_pos, width)
+            screen.blit(surface, (0, 0))
+        else:
+            pygame.draw.line(core.screen, color, start_pos, end_pos, width)
 
     def ellipse(color, rect, width=0):
 
@@ -266,10 +278,22 @@ class Draw:
             pygame.draw.ellipse(core.screen, color, rect, width)
 
     def arc(color, rect, start_angle, stop_angle, width=1):
-        pygame.draw.arc(core.screen, color, rect, start_angle, stop_angle, width)
+        if len(color) > 3:
+            shape_surf = pygame.Surface(pygame.Rect(rect).size, pygame.SRCALPHA)
+            pygame.draw.arc(shape_surf, color, rect, start_angle, stop_angle, width)
+            core.screen.blit(shape_surf, rect)
+        else:
+            pygame.draw.arc(core.screen, color, rect, start_angle, stop_angle, width)
+
 
     def lines(color, closed, points, width=1):
-        pygame.draw.lines(core.screen, color, closed, points, width)
+        if len(color) > 3:
+            surface = screen.convert_alpha()
+            surface.fill([0, 0, 0, 0])
+            pygame.draw.lines(surface, color, closed, points, width)
+            screen.blit(surface, (0, 0))
+        else:
+            pygame.draw.lines(core.screen, color, closed, points, width)
 
     def polygon(color, points, width=0):
         if len(color) > 3:
@@ -286,6 +310,8 @@ class Draw:
         pygame.font.init()
         myfont = pygame.font.SysFont(font, taille)
         textsurface = myfont.render(texte, False, color)
+        if len(color)>3:
+            textsurface.set_alpha(color[3])
         screen.blit(textsurface, position)
 
 
