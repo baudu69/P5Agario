@@ -315,6 +315,47 @@ class Draw:
         screen.blit(textsurface, position)
 
 
+class Sound:
+
+    def __init__(self,url):
+        self.ready = False
+        self.url = url
+        self.play=False
+        self.thread=None
+        if self.url!="":
+            pygame.mixer.pre_init(44100, -16, 2, 2048)
+            pygame.mixer.init()
+            pygame.mixer.music.load(url)
+
+    def start(self):
+        if not self.play:
+            self.play = True
+            self.thread=threading.Thread(target=self.playin(), args=(1,))
+
+    def rewind(self):
+        if self.play:
+            pygame.mixer.music.rewind()
+
+    def pause(self):
+        if self.play:
+            self.play = False
+            pygame.mixer.music.pause()
+        else:
+            self.play = True
+            pygame.mixer.music.unpause()
+
+
+    def stop(self):
+        if self.play:
+            self.play = False
+            pygame.mixer.music.stop()
+
+
+
+    def playin(self):
+        pygame.mixer.music.play()
+        print("playin")
+
 class Texture:
     def __init__(self, url, pos=pygame.Vector2(), offset=0, scaleSize=(100, 100), display=True,alpha=255):
         self.ready = False
