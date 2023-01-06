@@ -1,12 +1,17 @@
+from pygame import Vector2
 
 import core
 from sma.agent import Agent
 from sma.creep import Creep
+from sma.epidemie import Epidemie
+from sma.etat import Etat
 from sma.obstacle import Obstacle
 
 nbAgents = 10
+nbGroupes = 5
 nbCreeps = 0
 nbObstacles = 0
+
 
 def setup():
     core.fps = 30
@@ -15,9 +20,10 @@ def setup():
     core.memory("items", [])
     core.memory("creeps", [])
     core.memory("obstacles", [])
-    for i in range(0, nbAgents):
-        core.memory("agents").append(Agent())
-
+    for g in range(0, nbGroupes):
+        for i in range(0, nbAgents):
+            core.memory("agents").append(Agent(groupe=g))
+    # core.memory("agents").append(Agent(etat=Etat.CONTAGIEUX))
     for i in range(0, nbCreeps):
         core.memory("creeps").append(Creep())
 
@@ -32,6 +38,18 @@ def run():
         agent.compteDecision()
         agent.show()
 
+    if core.getMouseLeftClick():
+        agent = getClosestAgent(core.getMouseLeftClick())
+        agent.etat = Etat.CONTACT
+        agent.body.delai = Epidemie.dureeIncubation.value
+
+    # print sum of state of agents
+    print("Sains: %d, Contagieux: %d, Immunes: %d, Mort: %d" % (
+        len([a for a in core.memory("agents") if a.etat == Etat.SAIN]),
+        len([a for a in core.memory("agents") if a.etat == Etat.CONTAGIEUX]),
+        len([a for a in core.memory("agents") if a.etat == Etat.IMMUNISE]),
+        len([a for a in core.memory("agents") if a.etat == Etat.MORT]),
+    ))
     for agent in core.memory("creeps"):
         agent.show()
 
@@ -39,8 +57,12 @@ def run():
         obstacle.show()
 
 
-
-
+def getClosestAgent(position=Vector2(0, 0)):
+    closestAgent = core.memory("agents")[0]
+    for agent in core.memory("agents"):
+        if agent.body.position.distance_to(position) < closestAgent.body.position.distance_to(position):
+            closestAgent = agent
+    return closestAgent
 
 
 core.main(setup, run)

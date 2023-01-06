@@ -1,11 +1,13 @@
 from pygame import Vector2
 
+from sma.epidemie import Epidemie
+
 radiusBase = 20
 
 class Fustrom:
     def __init__(self, parent=None):
         self.parent = parent
-        self.radius = radiusBase
+        self.radius = Epidemie.distanceMiniContagion.value
         self.objetsPercus = []
 
     def inside(self, obj):

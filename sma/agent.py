@@ -10,28 +10,37 @@ from sma.obstacle import Obstacle
 
 
 class Agent:
-    def __init__(self, etat=Etat.SAIN):
+    def __init__(self, etat=Etat.SAIN, groupe=0):
         self.body = Body(self)
         self.listePerception = []
         self.uuid = random.randint(0, 99999999999999)
         self.etat = etat
+        self.groupe = groupe
 
 
     def filtre(self):
-        centre = None
-        voisin = []
-        obstacles = []
+        fratrie = []
         for p in self.listePerception:
-            if isinstance(p, Creep):
-                centre = p
-            elif isinstance(p, Obstacle):
-                obstacles.append(p)
-            else:
-                voisin.append(p)
-        return voisin, centre, obstacles
+            if self.groupe == p.groupe:
+                fratrie.append(p)
+        return fratrie
 
     def update(self):
-        return Vector2(random.randint(-10, 10), random.randint(-10, 10))
+        self.body.update()
+        att = Vector2(0, 0)
+        rep = Vector2(0, 0)
+        fratrie = self.filtre()
+        for frere in fratrie:
+            if self.etat == Etat.MALADE:
+                rep += self.body.position - frere.body.position
+            else:
+                att += frere.body.position - self.body.position
+        if len(fratrie) != 0:
+            if self.etat == Etat.MALADE:
+                rep = rep / len(fratrie)
+            else:
+                att /= len(fratrie)
+        return att + rep + Vector2(random.randint(-10, 10), random.randint(-10, 10))
 
     def show(self):
         self.body.show()
@@ -41,24 +50,7 @@ class Agent:
         for agent in core.memory("agents"):
             if not agent.uuid == self.uuid:
                 if self.body.fustrum.inside(agent.body):
-                    self.listePerception.append(agent.body)
-        for creep in core.memory("creeps"):
-            if (self.body.fustrum.insideObject(creep)):
-                self.body.taille += 0.5
-                creep.reset()
-            if self.body.fustrum.inside(creep):
-                self.listePerception.append(creep)
-
-        for agent in core.memory("agents"):
-            if not agent.uuid == self.uuid:
-                if self.body.fustrum.insideObject(agent.body):
-                    self.body.taille += 0.2*agent.body.taille
-                    self.body.fustrum.majRadius()
-                    agent.body.taille = 0
-
-        for obstacle in core.memory("obstacles"):
-            if self.body.fustrum.inside(obstacle):
-                self.listePerception.append(obstacle)
+                    self.listePerception.append(agent)
 
     def compteDecision(self):
         self.body.move(self.update())
