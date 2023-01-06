@@ -5,14 +5,16 @@ from pygame import Vector2
 import core
 from sma.body import Body
 from sma.creep import Creep
+from sma.etat import Etat
 from sma.obstacle import Obstacle
 
 
 class Agent:
-    def __init__(self):
-        self.body = Body()
+    def __init__(self, etat=Etat.SAIN):
+        self.body = Body(self)
         self.listePerception = []
         self.uuid = random.randint(0, 99999999999999)
+        self.etat = etat
 
 
     def filtre(self):
@@ -29,23 +31,7 @@ class Agent:
         return voisin, centre, obstacles
 
     def update(self):
-        voisin, target, obstacles = self.filtre()
-        rep = Vector2(0, 0)
-        if target is None:
-            att = Vector2(0, 0)
-        else:
-            att = target.position - self.body.position
-        for v in voisin:
-            if v.taille != 0:
-                if v.taille > self.body.taille:
-                    rep += self.body.position - v.position
-                else:
-                    att += v.position - self.body.position
-        for o in obstacles:
-            rep += (self.body.position - o.position)
-        if len(voisin) != 0:
-            rep /= len(voisin)
-        return rep + att
+        return Vector2(random.randint(-10, 10), random.randint(-10, 10))
 
     def show(self):
         self.body.show()

@@ -3,20 +3,22 @@ import random
 from pygame import Vector2
 
 import core
+from sma.etat import Etat
 from sma.fustrom import Fustrom
 
 padding = 40
 
 class Body:
-    def __init__(self):
+    def __init__(self, parent=None):
         self.position = Vector2(random.randint(padding, core.WINDOW_SIZE[0] - padding),
                                 random.randint(padding, core.WINDOW_SIZE[1] - padding))
         self.vitesse = Vector2(random.randint(-10, 10), random.randint(-10, 10))
         self.acceleration = Vector2(random.randint(-10, 10), random.randint(-10, 10))
         self.vMax = 10
         self.accMax = 4
-        self.taille = random.randint(5, 20)
+        self.taille = 10
         self.fustrum = Fustrom(self)
+        self.parent = parent
 
     def move(self, decision):
         if decision.length() > self.accMax:
@@ -48,4 +50,11 @@ class Body:
             self.position.y = self.taille
 
     def show(self):
-        core.Draw.circle((255, 255, 0), (self.position.x, self.position.y), self.taille, 0)
+        if self.parent.etat == Etat.SAIN:
+            core.Draw.circle((0, 255, 0), (self.position.x, self.position.y), self.taille, 0)
+        elif self.parent.etat == Etat.MALADE:
+            core.Draw.circle((255, 0, 0), (self.position.x, self.position.y), self.taille, 0)
+        elif self.parent.etat == Etat.IMMUNISE:
+            core.Draw.circle((0, 0, 255), (self.position.x, self.position.y), self.taille, 0)
+        elif self.parent.etat == Etat.MORT:
+            core.Draw.circle((255, 255, 255), (self.position.x, self.position.y), self.taille, 0)

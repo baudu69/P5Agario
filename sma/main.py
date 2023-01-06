@@ -4,9 +4,9 @@ from sma.agent import Agent
 from sma.creep import Creep
 from sma.obstacle import Obstacle
 
-nbAgents = 30
-nbCreeps = 50
-nbObstacles = 5
+nbAgents = 10
+nbCreeps = 0
+nbObstacles = 0
 
 def setup():
     core.fps = 30

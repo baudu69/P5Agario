@@ -1,11 +1,11 @@
 from pygame import Vector2
 
-radiusBase = 15
+radiusBase = 20
 
 class Fustrom:
     def __init__(self, parent=None):
         self.parent = parent
-        self.radius = radiusBase * parent.taille
+        self.radius = radiusBase
         self.objetsPercus = []
 
     def inside(self, obj):
@@ -25,6 +25,3 @@ class Fustrom:
         if obj.position.distance_to(self.parent.position) < self.parent.taille:
             return True
         return False
-
-    def majRadius(self):
-        self.radius = radiusBase * self.parent.taille
