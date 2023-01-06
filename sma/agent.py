@@ -5,6 +5,7 @@ from pygame import Vector2
 import core
 from sma.body import Body
 from sma.creep import Creep
+from sma.obstacle import Obstacle
 
 
 class Agent:
@@ -17,15 +18,18 @@ class Agent:
     def filtre(self):
         centre = None
         voisin = []
+        obstacles = []
         for p in self.listePerception:
             if isinstance(p, Creep):
                 centre = p
+            elif isinstance(p, Obstacle):
+                obstacles.append(p)
             else:
                 voisin.append(p)
-        return voisin, centre
+        return voisin, centre, obstacles
 
     def update(self):
-        voisin, target = self.filtre()
+        voisin, target, obstacles = self.filtre()
         rep = Vector2(0, 0)
         if target is None:
             att = Vector2(0, 0)
@@ -37,6 +41,8 @@ class Agent:
                     rep += self.body.position - v.position
                 else:
                     att += v.position - self.body.position
+        for o in obstacles:
+            rep += (self.body.position - o.position)
         if len(voisin) != 0:
             rep /= len(voisin)
         return rep + att
@@ -50,9 +56,6 @@ class Agent:
             if not agent.uuid == self.uuid:
                 if self.body.fustrum.inside(agent.body):
                     self.listePerception.append(agent.body)
-        # for item in core.memory("items"):
-        #     if self.body.fustrum.inside(item.body):
-        #         self.listePerception.append(item)
         for creep in core.memory("creeps"):
             if (self.body.fustrum.insideObject(creep)):
                 self.body.taille += 0.5
@@ -64,7 +67,12 @@ class Agent:
             if not agent.uuid == self.uuid:
                 if self.body.fustrum.insideObject(agent.body):
                     self.body.taille += 0.2*agent.body.taille
+                    self.body.fustrum.majRadius()
                     agent.body.taille = 0
+
+        for obstacle in core.memory("obstacles"):
+            if self.body.fustrum.inside(obstacle):
+                self.listePerception.append(obstacle)
 
     def compteDecision(self):
         self.body.move(self.update())
