@@ -50,18 +50,45 @@
 #
 #
 # core.main(setup, run)
-
+from pygame import Vector2
 
 import core
+from sma.agent import Agent
+from sma.body import Body
+from sma.creep import Creep
+from sma.player import Player
+from sma.fustrom import Fustrom
+
+
+
 
 
 def setup():
-    core.fps = 3
+    core.fps = 30
     core.WINDOW_SIZE = [800, 600]
+    core.memory("agents", [])
+    core.memory("items", [])
+    core.memory("creeps", [])
+    for i in range(0, 30):
+        core.memory("agents").append(Agent())
+
+    for i in range(0, 50):
+        core.memory("creeps").append(Creep())
 
 
 def run():
     core.cleanScreen()
+    for agent in core.memory("agents"):
+        agent.computePerception()
+        agent.compteDecision()
+        agent.show()
+
+    for agent in core.memory("creeps"):
+        agent.show()
+
+
+
+
 
 
 core.main(setup, run)
