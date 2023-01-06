@@ -7,8 +7,8 @@ from sma.epidemie import Epidemie
 from sma.etat import Etat
 from sma.obstacle import Obstacle
 
-nbAgents = 10
-nbGroupes = 5
+nbAgents = 7
+nbGroupes = 3
 nbCreeps = 0
 nbObstacles = 0
 
@@ -40,15 +40,15 @@ def run():
 
     if core.getMouseLeftClick():
         agent = getClosestAgent(core.getMouseLeftClick())
-        agent.etat = Etat.CONTACT
+        agent.body.etat = Etat.INCUBATION
         agent.body.delai = Epidemie.dureeIncubation.value
 
     # print sum of state of agents
     print("Sains: %d, Contagieux: %d, Immunes: %d, Mort: %d" % (
-        len([a for a in core.memory("agents") if a.etat == Etat.SAIN]),
-        len([a for a in core.memory("agents") if a.etat == Etat.CONTAGIEUX]),
-        len([a for a in core.memory("agents") if a.etat == Etat.IMMUNISE]),
-        len([a for a in core.memory("agents") if a.etat == Etat.MORT]),
+        len([a for a in core.memory("agents") if a.body.etat == Etat.SAIN]),
+        len([a for a in core.memory("agents") if a.body.etat == Etat.CONTAGIEUX]),
+        len([a for a in core.memory("agents") if a.body.etat == Etat.IMMUNISE]),
+        len([a for a in core.memory("agents") if a.body.etat == Etat.MORT]),
     ))
     for agent in core.memory("creeps"):
         agent.show()
