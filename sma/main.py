@@ -2,10 +2,8 @@ from pygame import Vector2
 
 import core
 from sma.agent import Agent
-from sma.creep import Creep
 from sma.epidemie import Epidemie
 from sma.etat import Etat
-from sma.obstacle import Obstacle
 
 nbAgents = 7
 nbGroupes = 3
@@ -23,12 +21,7 @@ def setup():
     for g in range(0, nbGroupes):
         for i in range(0, nbAgents):
             core.memory("agents").append(Agent(groupe=g))
-    # core.memory("agents").append(Agent(etat=Etat.CONTAGIEUX))
-    for i in range(0, nbCreeps):
-        core.memory("creeps").append(Creep())
 
-    for i in range(0, nbObstacles):
-        core.memory("obstacles").append(Obstacle())
 
 
 def run():
